@@ -1,0 +1,119 @@
+{include file="head" /}
+
+
+
+<!-- Kết thúc thêm khung soạn thảo -->
+
+{include file="menu" /}
+<link rel="stylesheet" href="/static/layui/css/layui.css" />
+<script src="/static/layui/layui.js"></script>
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+
+                          <div class="panel-body bio-graph-info">
+                              <h1> Thêm cấu hình tỷ lệ lợi nhuận</h1>
+                              <form class="form-horizontal" role="form" method="post" id="formid">
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Thời gian bắt đầu</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" id="start_time" placeholder="HH:mm:ss" name="start_time"  value="{$rs.start_time?$rs.start_time:''}"  >
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Thời gian kết thúc</label>
+                                      <div class="col-lg-6">
+                                         <input type="text" class="form-control" id="end_time" placeholder="HH:mm:ss" name="end_time"  value="{$rs.end_time?$rs.end_time:''}"  >
+                                         <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                               <strong>Lưu ý: </strong> Khi không nhập cả thời gian bắt đầu và kết thúc, tỷ lệ lợi nhuận sẽ được thiết lập là mặc định của hệ thống.
+                                        </div>
+                                      </div>
+                                      
+                                  </div>
+
+                                 <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tỷ lệ lợi nhuận</label>
+                                      <div class="col-lg-8">
+                                          <input type="text" class="form-control" value="{$rs.proscale?$rs.proscale:''}"  placeholder="Vui lòng nhập Tỷ lệ lợi nhuận" name="proscale">
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                               <strong>Lưu ý: </strong> Ví dụ, tỷ lệ lợi nhuận là 75%, 77%, 80%, 85%, vui lòng nhập dạng: 75,77,80,85. Tất cả đều phải có bốn số và không được để trống.
+                                        </div>
+                                      </div>
+                                  </div>
+
+                                  {if isset($rs.id) && !empty($rs.id)}
+                                    <input type="hidden" value="{$rs.id}" name="id">
+                                  {/if}
+
+
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <input type="submit" value="Gửi"  onclick="return editcon(this.form)" class="btn btn-success">
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+                      </section>
+
+                  </aside>
+                  </div>
+
+          </div>
+
+
+
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+<script type="text/javascript" src="/static/public/umeditor/umindex.js"></script>
+<script>
+  function editcon(form){
+
+    var start_time = form.start_time.value;
+    var end_time = form.end_time.value;
+    var proscale = form.proscale.value;
+
+
+    if((!start_time && end_time) || (start_time && !end_time)){layer.msg('Thời gian bắt đầu và kết thúc, bạn phải nhập cả hai hoặc không nhập cùng lúc, không thể chỉ nhập một trong hai'); return false;}
+    if(!proscale){layer.msg('Vui lòng nhập thông tin tỷ lệ lợi nhuận/ tỷ lệ lỗ'); return false;}
+
+    var formurl = "{:Url('system/addproscale')}";
+    var data = $('#formid').serialize();
+    var locurl = "{:Url('system/proscale')}";
+
+    WPpost(formurl,data,locurl);
+
+    return false;
+
+  }
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+
+//Chọn thời gian
+  laydate.render({
+    elem: '#end_time'
+    ,type: 'time'
+  });
+  
+  laydate.render({
+    elem: '#start_time'
+    ,type: 'time'
+  });
+  
+});  
+</script>

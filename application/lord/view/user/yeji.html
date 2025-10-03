@@ -1,0 +1,110 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+   <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          <!--state overview start-->
+              
+              <div class="row state-overview">
+                <div class="container">
+                <form action="{:url('user/yeji',array('uid'=>$_user['uid']))}" method="get">
+                <div class="row">
+                     
+                      
+                   <div class="col-lg-6 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Lọc theo thời gian</span>
+                            <input type="text"  id="datetimepicker" class="form-control" placeholder="Nhấp để chọn thời gian" name="starttime" value="{$getdata.starttime?$getdata.starttime:''}"/>
+                            <span class="input-group-addon" id="basic-addon1">đến</span>
+                            <input type="text"  id="datetimepicker_end" class="form-control" placeholder="Nhấp để chọn thời gian" name="endtime" value="{$getdata.endtime?$getdata.endtime:''}" />
+                        </div>
+                      </div>
+                      
+                  <div class="mar-10">
+                   <input type="submit" class="btn btn-success" value="Tìm kiếm">
+                  </div>
+                </div>
+                </form>
+              </div>
+              </div>
+              <!--state overview end-->
+              <br>
+              <!-- page start-->
+              <div class="row">
+                  <div class="col-lg-8">
+                  <p style="color: red;text-align: center;">Dữ liệu mặc định là dữ liệu của hôm nay</p>
+                      <!--widget start-->
+                      <aside class="profile-nav alt green-border">
+                          <section class="panel">
+                              
+                              
+                              <div class="panel-body bio-graph-info">
+                              
+                              <div class="form-horizontal">
+                                  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tên đăng nhập：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label">{$_user.username}</p>
+                                      </div>
+                                  </div>
+                                  <hr>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Số dư：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label">{$_user.usermoney}</p>
+                                      </div>
+                                  </div>
+                                  <hr>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tổng Phí giao dịch：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label">{$all_sxfee} </p>
+
+                                      </div>
+                                  </div>
+                                  <hr>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tổng lời lỗ khách hàng：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label">{$all_ploss}
+                                      </div>
+                                  </div>
+                                  <hr>
+
+
+                                 
+                                  
+                              </div>
+                          </div>
+
+                          </section>
+                      </aside>
+                      <!--widget end-->
+                      
+                  </div>
+                 </div> 
+              
+                 
+              
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+{include file="foot" /}
+<script>
+
+//Chọn thời gian
+$('#datetimepicker').datetimepicker();
+$('#datetimepicker_end').datetimepicker();
+
+
+
+</script>

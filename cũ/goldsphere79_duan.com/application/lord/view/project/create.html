@@ -1,0 +1,26 @@
+{include file="head" /}
+
+{include file="menu" /}
+<h1>Thêm dự án</h1>
+<form method="post" action="{:url('lord/Project/save')}">
+    <input type="hidden" name="__token__" value="{:token()}">
+    <p>Tiêu đề: <input type="text" name="title" required></p>
+    <p>Mô tả: <br><textarea name="description" rows="5" cols="60"></textarea></p>
+    <p>Lãi/ngày (%): <input type="number" step="0.001" name="rate_daily" value="0.5" required></p>
+    <p>Kỳ hạn (ngày): <input type="number" name="duration_days" value="30" required></p>
+    <p>Tối thiểu đầu tư: <input type="number" step="0.01" name="min_invest" value="100" required></p>
+    <p>Hạn mức (0 = không giới hạn): <input type="number" step="0.01" name="total_quota" value="0"></p>
+    <p>Trạng thái:
+        <select name="status">
+            <option value="1">Mở</option>
+            <option value="0">Ẩn</option>
+        </select>
+    </p>
+    <p><button type="submit">Lưu</button></p>
+</form>
+{include file="foot" /}
+<script>
+
+
+
+</script>

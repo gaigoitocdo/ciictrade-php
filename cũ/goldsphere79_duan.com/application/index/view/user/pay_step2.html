@@ -1,0 +1,74 @@
+{include file="head" /}
+<title>Nạp tiền tài khoản</title>
+<script>
+var pay_type = '';
+var wxpay_info = '';
+var returnrul = "{:url('user/index')}";
+</script>
+
+<style>
+.scroll-content{
+    overflow: scroll
+}
+.frm_list{margin:30px;}
+.frm_list li{clear:both;overflow:hidden; display:flex; padding:10px 0; font-size:16px;}
+.frm_list li label{display:inline-block; width:200px; font-size:18px; font-weight:bold;}
+.frm_list li img{max-width:75%; height:auto;}
+</style>
+
+<body ng-app="starter" ng-controller="AppCtrl" class="navbar grade-a platform-browser platform-ios platform-ios9 platform-ios9_1 platform-ready">
+
+<ion-nav-view class="view-container" nav-view-transition="ios" nav-view-direction="none" nav-swipe=""><ion-tabs class="tabs-icon-top navbar pane tabs-bottom tabs-standard" abstract="true" nav-view="active" style="opacity: 1; transform: translate3d(0%, 0px, 0px);">
+
+    <ion-nav-bar class="bar-stable headerbar nav-bar-container" nav-bar-transition="ios" nav-bar-direction="swap" nav-swipe="">
+
+    	<div class="nav-bar-block" nav-bar="active">
+    	    
+    		<ion-header-bar class="bar-stable headerbar bar bar-header" align-title="center">
+    		    <a style="position:absolute; left:8px; top:50%; margin-top:-12px; z-index:100; width:24px;" href="javascript:history.back(-1)">
+                            <i class="icon ion-ios-arrow-left" style="font-size:24px;"></i>
+                        </a>
+    			<div class="title title-center header-item" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">Nạp tiền tài khoản</div>
+    		</ion-header-bar>
+    	</div>
+    </ion-nav-bar>
+
+    <ion-content style="background:#fff;" class="personalbg scroll-content ionic-scroll scroll-content-false  has-header has-tabs" scroll="false">
+        <div style="height:160px;"></div>
+        <ol class="frm_list">
+            <li><label>Số tiền thanh toán：</label>{$rechargemoney}</li>
+            {neq name="$rs_payment.bankname" value=""}<li><label>Tên ngân hàng：</label>{$rs_payment.bankname}</li>{/neq}
+            {neq name="$rs_payment.bankuser" value=""}<li><label>Tên chủ thẻ：</label>{$rs_payment.bankuser}</li>{/neq}
+            {neq name="$rs_payment.card" value=""}<li><label>Số thẻ ngân hàng：</label>{$rs_payment.card}</li>{/neq}
+            {neq name="$rs_payment.qrcode" value=""}<li><label>Mã QR：</label><img src="{$rs_payment.qrcode}"></li>{/neq}
+            
+        </ol>
+        <div style="text-align:center;">
+            <button type="button" onclick="dochongzhi()" style="margin-top: 15%;color:#fff;width:75%" class="newbutton outmoneybtn">Xác nhận đã chuyển khoản</button>
+        </div>
+    </ion-content>
+
+    </ion-tabs>
+</ion-nav-view>
+
+</body>
+</html>
+<div id="zypay_post"></div>
+<script src="__HOME__/js/lk/user.js"></script>
+<script src="__HOME__/js/lk/jquery.qrcode.js"></script>
+<script src="__HOME__/js/lk/utf.js"></script>
+<script>
+
+</script>
+<script>
+    function dochongzhi() {
+        var paytype = {$paytype};
+        var userid = {$uid};
+        var addprice = {$rechargemoney};
+        var formurl = "{:Url('user/addbalance')}";
+        var data = 'uid=' + userid + '&paytype=' + paytype + "&rechargemoney=" + addprice;
+        var locurl = "{:Url('user/index')}";
+
+        WPpost(formurl, data, locurl);
+    };
+</script>

@@ -1,0 +1,220 @@
+{include file="head" /}
+
+
+
+<!-- Kết thúc thêm khung soạn thảo -->
+
+{include file="menu" /}
+<link rel="stylesheet" href="/static/layui/css/layui.css" />
+<script src="/static/layui/layui.js"></script>
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+
+                          <div class="panel-body bio-graph-info">
+                              <h1> Thêm cấu hình nạp tiền</h1>
+                              <form class="form-horizontal" role="form" method="post" id="formid">
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tên</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="pay_name"  value="{$pay_name?$pay_name:''}"  >
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Thông tin cấu hình</label>
+                                      <div class="col-lg-6">
+                                          <textarea name="pay_conf"  class="form-control" cols="30" rows="10">{$pay_conf?$pay_conf:''}</textarea>
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Định dạng: </strong> key1:value1|key2:value2|......
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Sử dụng</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="is_use"  value="{$is_use?$is_use:'0'}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> 1 hiển thị; 0 không hiển thị
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Phí giao dịch mỗi lần</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="pay_point"  value="{$pay_point?$pay_point:'0'}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Nhập phần trăm, ví dụ: 2% thì nhập 2
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tên ngân hàng</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="bankname"  value="{$bankname?$bankname:''}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Nhập tên ngân hàng
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Chủ tài khoản</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="bankuser"  value="{$bankuser?$bankuser:''}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Nhập tên chủ tài khoản
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Số thẻ</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="card"  value="{$card?$card:''}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Nhập số thẻ
+                                          </div>
+                                      </div>
+                                  </div>  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Mã QR</label>
+                                      <div class="col-lg-6">
+                                            <div class="layui-upload">
+                                              
+                                              <div class="layui-upload-list">
+                                                <img class="layui-upload-img" id="demo1" width="200" src="{$qrcode?$qrcode:''}">
+                                                <p id="demoText"></p>
+                                              </div>
+                                              <div style="width: 95px;">
+                                                <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+                                                  <div class="layui-progress-bar" lay-percent=""></div>
+                                                </div>
+                                              </div>
+                                              <button type="button" class="layui-btn" id="test1">Tải lên hình ảnh</button>
+                                            </div>
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Tải lên hình ảnh WeChat hoặc Zalopay
+                                          </div>
+                                          <input type="hidden" id="qrcode" name="qrcode"  value="{$qrcode?$qrcode:''}"  >
+                                      </div>
+                                  </div>  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Sắp xếp</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="pay_order"  value="{$pay_order?$pay_order:'0'}"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>Chú thích: </strong> Số càng lớn thì sắp xếp càng trước
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  {if isset($id) && !empty($id)}
+                                    <input type="hidden" value="{$id}" name="id">
+                                  {/if}
+
+
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <input type="submit" value="Gửi"  onclick="return editcon(this.form)" class="btn btn-success">
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+                      </section>
+
+                  </aside>
+                  </div>
+
+          </div>
+
+
+
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+<script type="text/javascript" src="/static/public/umeditor/umindex.js"></script>
+<script>
+  function editcon(form){
+
+    var pay_name = form.pay_name.value;
+    var pay_conf = form.pay_conf.value;
+    var is_use = form.is_use.value;
+    var pay_point = form.pay_point.value;
+
+    if(!pay_name){layer.msg('Vui lòng nhập tên'); return false;}
+    if(!pay_conf){layer.msg('Vui lòng nhập thông tin cấu hình'); return false;}
+
+    var formurl = "{:Url('system/addrech')}";
+    var data = $('#formid').serialize();
+    var locurl = "{:Url('system/recharge')}";
+
+    WPpost(formurl,data,locurl);
+
+    return false;
+
+  }
+
+layui.use(['upload', 'element', 'layer'], function(){
+  var $ = layui.jquery
+  ,upload = layui.upload
+  ,element = layui.element
+  ,layer = layui.layer;
+  
+  //常规使用 - 普通图片上传
+  var uploadInst = upload.render({
+    elem: '#test1'
+    ,url: "{:url('lord/system/upload_pic')}" //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#demo1').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('Đang tải lên', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果Tải lên thất bại
+      console.log(res);
+      if(res.code == 0){
+        return layer.msg(res.msg);
+      }
+      //上传成功的一些操作
+      $('#demo1').attr('src', res.url);
+      $("#qrcode").val(res.url);
+      $('#demoText').html(''); //置空Tải lên thất bại的状态
+    }
+    ,error: function(){
+      //演示失败状态，并实现重传
+      var demoText = $('#demoText');
+      demoText.html('<span style="color: #FF5722;">Tải lên thất bại</span> <a class="layui-btn layui-btn-xs demo-reload">Thử lại</a>');
+      demoText.find('.demo-reload').on('click', function(){
+        uploadInst.upload();
+      });
+    }
+    //进度条
+    ,progress: function(n, elem, e){
+      element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+      if(n == 100){
+        layer.msg('Tải lên hoàn tất', {icon: 1});
+      }
+    }
+  });
+});
+ 
+</script>

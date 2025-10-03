@@ -1,0 +1,135 @@
+{include file="head" /}
+
+
+
+<!-- Kết thúc thêm khung soạn thảo -->
+
+{include file="menu" /}
+
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+
+                          <div class="panel-body bio-graph-info">
+                              <h1> Thêm quản trị viên</h1>
+                              <form class="form-horizontal" role="form" method="post" id="formid">
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Tên đăng nhập</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="nickname"  value="{$username?$username:''}"  >
+                                      </div>
+                                  </div>
+
+
+
+
+									{if isset($isedit) && $isedit == 1}
+
+									               <input type="hidden" value="{$uid}" name="uid">
+								                
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Mật khẩu mới</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Xác nhận mật khẩu</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd2">
+                                      </div>
+                                  </div>
+                                  <input type="hidden" class="form-control"  value="{$uid}" name="uid">
+								{else/}
+								                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Mật khẩu</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">Xác nhận mật khẩu</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd2">
+                                      </div>
+                                  </div>
+                                  <input type="hidden" class="form-control"  value="" name="ordpwd">
+								{/if}
+
+
+
+
+
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <input type="submit" value="Gửi"  onclick="return editcon(this.form)" class="btn btn-success">
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+                      </section>
+
+                  </aside>
+                  </div>
+
+          </div>
+
+
+
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+<script type="text/javascript" src="/static/public/umeditor/umindex.js"></script>
+<script>
+
+	function editcon(form){
+
+
+		var otype = "{:input('param.otype')}";
+    var type = "{$isedit?$isedit:'0'}";
+
+    var nickname = form.nickname.value;
+    var upwd = form.upwd.value;
+    var upwd2 = form.upwd2.value;
+
+
+    if(!nickname){layer.msg('Vui lòng nhập Tên đăng nhập'); return false;}
+    if(type == 0 || (type == 1 && upwd)){
+      if(!upwd){layer.msg('Vui lòng nhập Mật khẩu'); return false;}
+      if(upwd.length < 6){layer.msg('Mật khẩu phải có ít nhất 6 ký tự'); return false;}
+      if(!upwd2){layer.msg('Vui lòng xác nhận mật khẩu'); return false;}
+      if(upwd !== upwd2){layer.msg('Hai lần nhập mật khẩu không giống nhau'); return false;}
+    }
+
+
+
+
+    var formurl = "{:Url('system/adminadd')}";
+    var data = $('#formid').serialize();
+    var locurl = "{:Url('system/adminlist')}";
+
+    WPpost(formurl,data,locurl);
+
+    return false;
+	}
+
+
+</script>

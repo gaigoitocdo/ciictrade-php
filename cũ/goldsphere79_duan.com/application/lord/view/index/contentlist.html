@@ -1,0 +1,81 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              
+            
+          <div class="row">
+                  <div class="col-sm-8">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              <h4 class="left">Danh sách bài viết</h4> 
+                              <a href="contentadd.html"><button type="button" class="btn btn-primary right">Thêm bài viết</button></a>
+                              <br><br>
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>STT</th>
+                                  <th>Thuộc danh mục</th>
+                                  <th>Tiêu đề bài viết</th>
+                                  <th>Thao tác</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <!-- {volist name="newsinfo" id="vo"} -->
+                              <tr>
+                                  <td>{$vo.nid}</td>
+                                  <td>{$vo.fclass}</td>
+                                  <td>{$vo.ntitle}</td>
+                                  <td> 
+                                      <a href="{:url('index/contentadd',array('nid'=>$vo['nid']))}"><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button></a>
+                                      <button class="btn btn-danger btn-xs" onclick="deleteinfo('{$vo.nid}')" title="Nhấp để xóa"><i class="icon-trash "></i></button>
+                                  </td>
+                                  
+                              </tr>
+                              <!-- {/volist} -->
+                              </tbody>
+                          </table>
+                      </section>
+						{$newsinfo->render()}
+                      
+                  </div>
+
+          </div>       
+          
+          
+             
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+{include file="foot" /}
+<script>
+//delete info
+	function deleteinfo(id){
+		layer.open({
+		  content: 'Chắc chắn muốn xóa ?',
+		  yes: function(index){
+		    //do something
+		    var url = "{:url('index/delcon')}"+"?id="+id;
+		    
+		    $.get(url,function(data){
+		    	if (data.type == 1) {
+		          layer.msg(data.data, {icon: 1,time: 1000},function(){
+		            window.location.href="{:Url('lord/index/contentlist')}";
+		          }); 
+
+		        }else if(data.type == -1){
+		          layer.msg(data.data, {icon: 2}); 
+		        }
+		    });
+		  }
+		});
+	}
+
+</script>
