@@ -1,7 +1,0 @@
-ngingx  mysql5.6  php7.0 redis phpinfo
-
-application/config.php
-
-coller.html
-
-Giao Dịch
